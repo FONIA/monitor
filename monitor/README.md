@@ -19,6 +19,7 @@
 获取安装
 
 - go get github.com/FONIA/monitor
+- go build ServiceMonitorMain.go
 - 修改config 配置文件
 - 赋权：chmod +x run.sh stop.sh
 - 启动服务 sh run.sh 服务名 
