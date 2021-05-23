@@ -25,3 +25,4 @@
 - 后台运行 nohup sh run.sh 服务名 &
 - 停止服务 sh stop.sh
   
+![image](https://user-images.githubusercontent.com/26178301/119254761-d67a1b00-bbea-11eb-9d41-6caa59dfa5b9.png)
