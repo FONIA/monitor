@@ -7,6 +7,8 @@ var Service = map[string]bool{
 	"nginx":true,
 	"mysql":true,
 	"php":true,
+	"redis":true,
+	"server":true,
 }
 
 //nginx配置监控参数
@@ -28,13 +30,13 @@ type EmailNotice struct {
 	Email
 }
 
-func (c *EmailNotice) EmailInit() {
-	c.MailHost = "smtp.qq.com"
-	c.MailPort = "587"
-	c.MailUser = "1033569557@qq.com"
-	c.MailPwd = "xxx"
-	c.MailNick = "FONIA"
-	c.Target = "1033569557@qq.com"
+func (x *EmailNotice) EmailInit() {
+	x.MailHost = "smtp.qq.com"
+	x.MailPort = "587"
+	x.MailUser = "1033569557@qq.com"
+	x.MailPwd = "xxx"
+	x.MailNick = "FONIA"
+	x.Target = "1033569557@qq.com"
 }
 
 //mysql检测
@@ -65,4 +67,33 @@ func (m *PhpCheck) Phpinit()  {
 	m.IsSendMsg=true
 	m.RestartShell = " /usr/local/php/sbin/php-fpm && /usr/local/php5.6/sbin/php-fpm "  //重启服务命令
 	m.CheckTime=5  //检测间隔时间（秒）
+}
+
+
+//redis配置监控参数
+type RedisCheck struct {
+	Configs
+}
+func (c *RedisCheck) Redisinit() {
+	c.ServerName="redis"  //服务名称
+	c.Msgtype="email"     // 默认email
+	c.IsSendMsg=true	 // 邮件
+	c.Url = "127.0.0.1:6379 null 0" //检测地址 redis地址 密码 Db
+	c.IsFailedReload = true ////服务异常是否重新启动
+	c.RestartShell = "docker restart redis"  //重启服务命令
+	c.CheckTime=5  //检测间隔时间（秒）
+}
+
+
+//服务器cpu、cache、disk监控
+type ServerCheck struct {
+	SerCfg
+}
+func (c *ServerCheck) Serverinit() {
+	c.Msgtype = "email"     // 默认email
+	c.IsSendMsg = true	
+	c.Cpu = 80 
+	c.CheckTime = 5  
+	c.Mem = 80
+	c.Disk = 80
 }

@@ -20,3 +20,12 @@ type Email struct {
 	MailNick string //发件昵称
 	Target string //收件人
 }
+
+type SerCfg struct {
+	Cpu	float64 //cpu使用率告警线
+	Mem float64 //内存使用率告警线
+	Disk float64 //硬盘使用率告警线
+	CheckTime int64 //检测时间
+	Msgtype	string // 通知方式
+	IsSendMsg bool   //服务异常是否开启通知
+}
