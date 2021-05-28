@@ -7,13 +7,15 @@ import (
 	"monitor/service/php"
 	"monitor/service/nginx"
 	"monitor/service/mysql"
+	"monitor/service/redis"
+	"monitor/service/server"
 	cfg "monitor/config"
 )
 
 func main() {
 	arg := os.Args
 	if len(arg) < 2 {
-		Println("\r\n入参错误：\r\n1.服务监控项：", cfg.Service,  "\r\n 2.终止脚本：stop")
+		Println("\r\n入参错误：\r\n1.服务监控项：", cfg.Service,  "\r\n2.终止脚本：stop")
 		return
 	}
 
@@ -57,6 +59,10 @@ func Registered(Service string) {
 			go mysql.Run() //注册mysql检测
 		case "php":
 			go php.Run()   //注册php检测
+		case "redis":
+			go redis.Run() //redis
+		case "server":
+			go server.Run()	//服务器cpu、cache、disk监控
 		default:
 			Println("不存在的监控项：", Service)
 	}

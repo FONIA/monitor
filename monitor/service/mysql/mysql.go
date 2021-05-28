@@ -3,7 +3,7 @@ package mysql
 import (
 	"database/sql"
 	. "fmt"
-	_ "monitor/device/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"time"
 	"monitor/config"
 	"monitor/tool"
