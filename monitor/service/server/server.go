@@ -23,7 +23,7 @@ func checkservice(data config.ServerCheck) {
 		cpu := tool.GetCpuPercent() //检测CPU
 		mem := tool.GetMemPercent() //检测内存
 		disk := tool.GetDiskPercent() //检测硬盘
-		if cpu < data.Cpu || mem < data.Mem || disk < data.Disk {
+		if cpu >= data.Cpu || mem >= data.Mem || disk >= data.Disk {
 			if data.IsSendMsg && data.Msgtype == "email" {
 				Notice := config.EmailNotice{}
 				Notice.EmailInit()
